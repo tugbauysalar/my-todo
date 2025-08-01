@@ -17,7 +17,14 @@ function TodoList() {
         setTodoList(newTodos);
     }
 
-  return (
+    const deleteTodo = (index) => {
+        setTodoList(todoList.filter(( _ , i ) => i !== index))
+    }
+
+    const completedTodos = todoList.filter((item) => item.completed)
+    const activeTodos = todoList.filter((item) => !item.completed)
+
+   return (
     <div>
         <input 
            value = {todo}
@@ -27,22 +34,43 @@ function TodoList() {
 
         <button onClick={addTodo}>Ekle</button>
 
+        <h2>Aktif Görevler</h2>
         <ul>
-            {todoList.map((item,index) => (
+            {activeTodos.map((item,index) => (
                 <li key={index}>
-                    <span style={{ textDecoration: item.completed ? "line-through" : "none" }}>
+                    <span>
                      {item.text}
                     </span>
                     <input 
                     type = "checkbox"
                     checked = {item.completed}
-                    onChange={() => todoCompleted(index)}
+                    onChange={() => todoCompleted(todoList.indexOf(item))}
                     style={{ marginLeft: "10px" }}
                     />
                 </li>
             ))}
         </ul>
 
+        <h2>Tamamlanan Görevler</h2>
+        <ul>
+            {completedTodos.map((item,index) => (
+                <li key={index} style={{ textDecoration: "line-through" }}>
+                    <span>
+                     {item.text}
+                    </span>
+                    <input 
+                    type = "checkbox"
+                    checked = {item.completed}
+                    onChange={() => todoCompleted(todoList.indexOf(item))}
+                    style={{ marginLeft: "10px" }}
+                    />
+
+                    <button onClick={() => deleteTodo(todoList.indexOf(item))}
+                       style={{ marginLeft: "10px" }}
+                    >Sil</button>
+                </li>
+            ))}
+        </ul>
     </div>
   )
 }
