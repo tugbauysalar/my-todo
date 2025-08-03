@@ -2,7 +2,9 @@ import React from 'react'
 
 function Header() {
 
-  return <h1>Yapılacak Listesi</h1>
+  return (<header className="header">
+      <h1 className="header-title">Yapılacak Listesi</h1>
+    </header>)
 
 }
 
