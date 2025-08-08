@@ -7,6 +7,8 @@ function TodoList() {
     const storedTodos = localStorage.getItem("todos");
     return storedTodos ? JSON.parse(storedTodos) : [];
   });
+  const [editId, setEditId] = useState(null);
+  const [editText, setEditText] = useState("");
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todoList));
@@ -41,6 +43,26 @@ function TodoList() {
     setTodoList((prev) => prev.filter((item) => !item.completed));
   };
 
+  const startEditing = (id, currentText) => {
+    setEditId(id);
+    setEditText(currentText);
+  };
+
+  const saveEdit = (id) => {
+    setTodoList((prev) =>
+      prev.map((item) =>
+        item.id === id ? { ...item, text: editText.trim() || item.text } : item
+      )
+    );
+    setEditId(null);
+    setEditText("");
+  };
+
+  const cancelEdit = () => {
+    setEditId(null);
+    setEditText("");
+  };
+
   const completedTodos = todoList.filter((item) => item.completed);
   const activeTodos = todoList.filter((item) => !item.completed);
 
@@ -64,23 +86,58 @@ function TodoList() {
           <ul>
             {activeTodos.map((item) => (
               <li key={item.id} className="todo-item">
-                <span>{item.text}</span>
-                <div className="actions">
-                  <input
-                    type="checkbox"
-                    id={`todo-${item.id}`}
-                    name={`todo-${item.id}`}
-                    checked={item.completed}
-                    onChange={() => todoCompleted(item.id)}
-                    className="todo-checkbox"
-                  />
-                  <button
-                    className="delete-btn"
-                    onClick={() => deleteTodo(item.id)}
-                  >
-                    Sil
-                  </button>
-                </div>
+                {editId === item.id ? (
+                  <>
+                    <input
+                      type="text"
+                      className="edit-input"
+                      value={editText}
+                      onChange={(e) => setEditText(e.target.value)}
+                      onBlur={() => saveEdit(item.id)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") saveEdit(item.id);
+                        else if (e.key === "Escape") cancelEdit();
+                      }}
+                      autoFocus
+                    />
+                    <div className="actions">
+                      <input
+                        type="checkbox"
+                        id={`todo-${item.id}`}
+                        name={`todo-${item.id}`}
+                        checked={item.completed}
+                        onChange={() => todoCompleted(item.id)}
+                        className="todo-checkbox"
+                      />
+                      <button
+                        className="delete-btn"
+                        onClick={() => deleteTodo(item.id)}
+                      >
+                        Sil
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <span onDoubleClick={() => startEditing(item.id, item.text)}>{item.text}</span>
+                    <div className="actions">
+                      <input
+                        type="checkbox"
+                        id={`todo-${item.id}`}
+                        name={`todo-${item.id}`}
+                        checked={item.completed}
+                        onChange={() => todoCompleted(item.id)}
+                        className="todo-checkbox"
+                      />
+                      <button
+                        className="delete-btn"
+                        onClick={() => deleteTodo(item.id)}
+                      >
+                        Sil
+                      </button>
+                    </div>
+                  </>
+                )}
               </li>
             ))}
           </ul>
