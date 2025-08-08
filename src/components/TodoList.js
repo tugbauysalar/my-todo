@@ -19,6 +19,12 @@ function TodoList() {
     setTodo("");
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      addTodo();
+    }
+  };
+
   const todoCompleted = (id) => {
     setTodoList((prev) =>
       prev.map((item) =>
@@ -29,6 +35,10 @@ function TodoList() {
 
   const deleteTodo = (id) => {
     setTodoList((prev) => prev.filter((item) => item.id !== id));
+  };
+
+  const clearCompleted = () => {
+    setTodoList((prev) => prev.filter((item) => !item.completed));
   };
 
   const completedTodos = todoList.filter((item) => item.completed);
@@ -42,6 +52,7 @@ function TodoList() {
           name="todo"
           value={todo}
           onChange={(e) => setTodo(e.target.value)}
+          onKeyDown={handleKeyDown}
           placeholder="Yapılacak görev ekle"
         />
         <button onClick={addTodo}>Ekle</button>
@@ -61,12 +72,11 @@ function TodoList() {
                     name={`todo-${item.id}`}
                     checked={item.completed}
                     onChange={() => todoCompleted(item.id)}
-                    style={{ order: 1, marginLeft: "10px" }}
+                    className="todo-checkbox"
                   />
                   <button
                     className="delete-btn"
                     onClick={() => deleteTodo(item.id)}
-                    style={{ order: 2, marginLeft: "10px" }}
                   >
                     Sil
                   </button>
@@ -76,9 +86,9 @@ function TodoList() {
           </ul>
         </div>
 
-        <div className="todo-section">
+        <div className="todo-section completed-section">
           <h2 className="completed-title">Tamamlanan Görevler</h2>
-          <ul>
+          <ul className="completed-list">
             {completedTodos.map((item) => (
               <li key={item.id} className="todo-item completed">
                 <span>{item.text}</span>
@@ -89,12 +99,11 @@ function TodoList() {
                     name={`todo-${item.id}`}
                     checked={item.completed}
                     onChange={() => todoCompleted(item.id)}
-                    style={{ order: 1, marginLeft: "10px" }}
+                    className="todo-checkbox"
                   />
                   <button
                     className="delete-btn"
                     onClick={() => deleteTodo(item.id)}
-                    style={{ order: 2, marginLeft: "10px" }}
                   >
                     Sil
                   </button>
@@ -102,6 +111,11 @@ function TodoList() {
               </li>
             ))}
           </ul>
+          {completedTodos.length > 0 && (
+            <button className="clear-completed-btn" onClick={clearCompleted}>
+              Tümünü Sil
+            </button>
+          )}
         </div>
       </div>
     </div>
