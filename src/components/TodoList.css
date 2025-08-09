@@ -21,6 +21,8 @@
   padding: 10px;
   border-radius: 6px;
   border: 1px solid #ccc;
+  padding-left: 12px;
+  padding-right: 12px;
 }
 
 .input-area button {
@@ -43,7 +45,6 @@
   gap: 20px;
   text-align: left;
   align-items: flex-start;
-  padding: 0 10px;
 }
 
 .todo-section {
@@ -55,6 +56,8 @@
   display: flex;
   flex-direction: column;
   min-height: 300px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .completed-section {
@@ -199,8 +202,6 @@
 @media (max-width: 768px) {
   .todo-lists {
     flex-direction: column;
-    gap: 30px;
-    padding: 0 15px;
   }
   .input-area {
     flex-direction: column;
@@ -208,12 +209,19 @@
   .input-area input {
     flex: none;
     width: 100%;
+    padding-left: 12px;
+    padding-right: 12px;
   }
   .input-area button {
     width: 100%;
   }
   .todo-section {
-    min-height: 300px;
-    width: 100%;
+    min-height: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .todo-container {
+    padding-left: 15px;
+    padding-right: 15px;
   }
 }
