@@ -1,12 +1,13 @@
 .todo-container {
   max-width: 900px;
   margin: 40px auto;
-  padding: 20px;
+  padding: 20px 20px;
   background-color: #f8f9fa;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
   text-align: center;
+  box-sizing: border-box;
 }
 
 .input-area {
@@ -18,11 +19,10 @@
 
 .input-area input {
   flex: 0.6;
-  padding: 10px;
+  padding: 10px 15px;
   border-radius: 6px;
   border: 1px solid #ccc;
-  padding-left: 12px;
-  padding-right: 12px;
+  box-sizing: border-box;
 }
 
 .input-area button {
@@ -45,19 +45,20 @@
   gap: 20px;
   text-align: left;
   align-items: flex-start;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .todo-section {
-  flex: 1;
+  flex: 1 1 0;
   background-color: #fff;
-  padding: 15px;
+  padding: 15px 20px;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
   min-height: 300px;
-  padding-left: 15px;
-  padding-right: 15px;
+  box-sizing: border-box;
 }
 
 .completed-section {
@@ -209,19 +210,19 @@
   .input-area input {
     flex: none;
     width: 100%;
-    padding-left: 12px;
-    padding-right: 12px;
+    padding-left: 15px;
+    padding-right: 15px;
   }
   .input-area button {
     width: 100%;
   }
   .todo-section {
     min-height: auto;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
   .todo-container {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }
