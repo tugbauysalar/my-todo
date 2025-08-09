@@ -43,6 +43,7 @@
   gap: 20px;
   text-align: left;
   align-items: flex-start;
+  padding: 0 10px;
 }
 
 .todo-section {
@@ -198,6 +199,8 @@
 @media (max-width: 768px) {
   .todo-lists {
     flex-direction: column;
+    gap: 30px;
+    padding: 0 15px;
   }
   .input-area {
     flex-direction: column;
@@ -210,6 +213,7 @@
     width: 100%;
   }
   .todo-section {
-    min-height: auto;
+    min-height: 300px;
+    width: 100%;
   }
 }
