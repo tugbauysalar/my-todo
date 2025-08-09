@@ -59,7 +59,6 @@
 .completed-section {
   display: flex;
   flex-direction: column;
-  /* min-height: 300px; */
   height: 100%;
 }
 
@@ -194,4 +193,23 @@
 
 .clear-completed-btn:hover {
   background-color: #c82333;
+}
+
+@media (max-width: 768px) {
+  .todo-lists {
+    flex-direction: column;
+  }
+  .input-area {
+    flex-direction: column;
+  }
+  .input-area input {
+    flex: none;
+    width: 100%;
+  }
+  .input-area button {
+    width: 100%;
+  }
+  .todo-section {
+    min-height: auto;
+  }
 }

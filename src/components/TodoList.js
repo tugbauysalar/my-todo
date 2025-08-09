@@ -82,7 +82,9 @@ function TodoList() {
 
       <div className="todo-lists">
         <div className="todo-section">
-          <h2 className="active-title">Aktif Görevler</h2>
+          <h2 className="active-title">
+            Aktif Görevler <span className="counter">({activeTodos.length})</span>
+          </h2>
           <ul>
             {activeTodos.map((item) => (
               <li key={item.id} className="todo-item">
@@ -103,8 +105,6 @@ function TodoList() {
                     <div className="actions">
                       <input
                         type="checkbox"
-                        id={`todo-${item.id}`}
-                        name={`todo-${item.id}`}
                         checked={item.completed}
                         onChange={() => todoCompleted(item.id)}
                         className="todo-checkbox"
@@ -123,8 +123,6 @@ function TodoList() {
                     <div className="actions">
                       <input
                         type="checkbox"
-                        id={`todo-${item.id}`}
-                        name={`todo-${item.id}`}
                         checked={item.completed}
                         onChange={() => todoCompleted(item.id)}
                         className="todo-checkbox"
@@ -144,7 +142,9 @@ function TodoList() {
         </div>
 
         <div className="todo-section completed-section">
-          <h2 className="completed-title">Tamamlanan Görevler</h2>
+          <h2 className="completed-title">
+            Tamamlanan Görevler <span className="counter">({completedTodos.length})</span>
+          </h2>
           <ul className="completed-list">
             {completedTodos.map((item) => (
               <li key={item.id} className="todo-item completed">
@@ -152,8 +152,6 @@ function TodoList() {
                 <div className="actions">
                   <input
                     type="checkbox"
-                    id={`todo-${item.id}`}
-                    name={`todo-${item.id}`}
                     checked={item.completed}
                     onChange={() => todoCompleted(item.id)}
                     className="todo-checkbox"
